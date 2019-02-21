@@ -1,5 +1,3 @@
-#!/bin/bash
-
 log=`unzip "nature.zip"`
 for f in nature/*; do
 	filename=`basename "$f"`

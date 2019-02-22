@@ -1,6 +1,15 @@
 # Soal Shift Modul 1 (Kelompok E6)
 
+###### Nama Anggota :
+1. Ifta Jihan Nabila (05111740000034)
+2. Komang Yogananda MW (05111740000114)
+
 Soal Shift Modul 1 Sistem Operasi 2019:
+* [Soal 1](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-1)
+* [Soal 2](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-2)
+* [Soal 3](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-3)
+* [Soal 4](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-4)
+* [Soal 5](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-5)
 
 ## Soal 1
 Anda diminta tolong oleh teman anda untuk mengembalikan filenya yang telah dienkripsi oleh seseorang menggunakan bash script, file yang dimaksud adalah nature.zip. Karena terlalu mudah kalian memberikan syarat akan membuka seluruh file tersebut jika pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
@@ -35,7 +44,7 @@ Hint: Base64, Hexdump
     
 * Buat crontab untuk membuka file dengan sayarat pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
 
-
+  `14 14 14 2 5 /home/jihan/soal1.sh` 
   
 ## Soal 2
 Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta untuk memberikan laporan berdasarkan file WA_Sales_Products_2012-14.csv. Laporan yang diminta berupa:
@@ -176,6 +185,92 @@ c.	setelah huruf z akan kembali ke huruf a
 d.	Backup file syslog setiap jam.
 
 e.	dan buatkan juga bash script untuk dekripsinya.
+
+**_Jawaban:_**
+
+1. Untuk [soal4.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4.sh)
+
+2. Untuk [soal4_2.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4_2.sh)
+
+**Command untuk enkripsi : bash soal4_2.sh -e**
+
+* Buat script untuk enkripsi
+
+  ```
+  jam=`date +"%H"`
+  filename=`date +"%H:%M %d-%m-%Y"`
+  ```
+  variabel **jam** untuk menyimpan jam saat ini. variabel **filename** untuk menyimpan nama file dengan format "jam:menit tanggal-bulan-tahun" saat ini
+  
+  ```
+  function chr(){
+  printf \\$(printf '%03o' $1)
+  }
+
+  a=`cat /var/log/syslog`
+
+  chra=`chr $(($jam + 65))`
+  chrz=`chr $(($jam + 65 - 1))`
+  ```
+  - fungsi **chr** disini untuk mengkonversi nilai decimal ke dalam ASCII. variabel **a** untuk menyimpan isi dari syslog. 
+  
+  - `$(($jam + 65))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A, lalu disimpan pada variabel **chra** sebagai batas bawah untuk konversi hingga huruf Z.
+  
+  - `$(($jam + 65 - 1))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A dikurangi 1 (sebelum A), lalu disimpan pada variabel **chrz** sebagai batas atas untuk konversi dari Z hingga chrz.
+  
+  
+  ```
+  function enkripsi(){
+	if [ $jam -eq 0 ]
+	then printf '%s' "$a" > "$filename"
+	else
+	r="$chra-ZA-$chrz"
+	 printf '%s' "$a"| tr A-Za-z $r${r,,} > "$filename"
+	fi
+  }
+  ```
+  - fungsi **enkripsi**, apabila jam saat ini adalah 0 maka simpan ke dalam file dengan isi yang sama.
+  
+  - Jika tidak, maka isi file akan dienkripsi dengan menggunakan command **tr** A-Za-z dengan chra dan chrz yang tadi telah dihitung. `${r,,}` digunakan untuk lowercase. 
+  
+  - Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
+  
+
+**Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'**
+  
+* Buat script untuk dekripsi 
+
+  ```
+  function dekripsi(){
+	jamD=$2
+	b=`cat "$1"`
+
+	chra=`chr $(($jamD + 65))`
+	chrz=`chr $(($jamD + 65 - 1))`
+	if [ $jamD -eq 0 ]
+	then printf '%s' "$b" > "dekripsi_$1"
+	else
+	r="$chra-ZA-$chrz"
+	 printf '%s' "$b" | tr $r${r,,} A-Za-z > "dekripsi_$1"
+	fi
+   }
+  ```
+  
+  Tidak beda jauh penjelasannya dengan fungsi enkripsi, namun pada fungsi dekripsi terdapat variabel **jamD** yang diambil dari nama file. Untuk mendapatkan **jamD** maka terdapat perintah 
+  
+  ```
+  filenameD=$2
+  jamdekripsi=${filenameD:0:2}
+  dekripsi "$2" "$jamdekripsi"
+  ```
+  untuk mengambil karakter dari index 0-2 pada nama file. 
+  
+  Lalu didekripsi dengan menukar posisi yang ada setelah command **tr**, dan akan disimpan pada file "dekripsi_'format file'".
+  
+* Crontab yang digunakan untuk backup syslog tiap jam
+
+  `0 * * * * /home/jihan/soal4.sh -e`
+
 
 ## Soal 5
 Buatlah sebuah script bash untuk menyimpan record dalam syslog yang memenuhi kriteria berikut:

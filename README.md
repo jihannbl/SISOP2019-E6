@@ -46,6 +46,91 @@ b. Tentukan tiga product line yang memberikan penjualan(quantity) terbanyak pada
 
 c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasarkan tiga product line yang didapatkan pada soal poin b.
 
+**_Jawaban:_**
+
+    #!/bin/bash
+
+    country=`awk -F "," '
+    {
+        if ($7 == "2012"){
+            countries[$1]+=$10
+        }
+    }
+    END {
+        for (country in countries){
+            if (countries[country]>mx){
+                mx=countries[country]
+                ans=country;
+            }
+        }
+        print ans
+    }
+    ' < "$1"`
+
+    echo "Negara dengan penjualan terbanyak tahun 2012:  $country"
+
+Pertama-tama variabel country menyimpan nilai nama negara yang mempunyai kuantitas penjualan pada tahun 2012 terbanyak. Country dapat dicari dengan menggunakan script diatas. 
+- Awk digunakan untuk memeriksa setiap barisnya yaitu apabila kolom ke 7 (kolom tahun) merupakan 2012 maka array penghitung dengan index country tersebut ditambah dengan kolom 10 (kolom quantity). 
+- Diakhir awk cek isi dari array tersebut dan cari negara dengan penjualan terbanyak.
+
+    ```
+    declare -a pL
+    for i in 1 2 3; do
+
+        pL[$i]=`awk -F "," '
+        {
+            if ($7 == "2012" && $1 == "'"$country"'"){
+                counter[$4]+=$10
+            }
+        }
+        END{
+            for (x in counter){
+                print counter[x]","x
+            }
+        } ' < "$1" | sort -nr | awk -F "," '{ if (NR == "'"$i"'") print $2 }'`
+    done
+
+    echo "Top 3 Product line from $country"
+    for x in "${pL[@]}"; do
+        echo $x
+    done
+    ```
+
+Kemudian selanjutnya mencari 3 product line terbanyak dari country yang sudah di dapat. 
+- Deklarasikan array bernama pL. 
+- Iterasi sebanyak 3 kali dimana setiap iterasi menganduk sintaks awk yang memeriksa apakah suatu baris memiliki negara yang diinginkan dan tahun 2012. 
+- Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut.
+
+    ```
+    ans2=`awk -F "," '
+    /('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/{
+        if ($7 == "2012" && $1 == "'"$country"'"){
+            counter2[$6]+=$10
+        }
+    }
+    END{
+        for (x in counter2){
+            print counter2[x]","x
+        }
+    }
+    ' < "$1" | sort -nr | awk -F "," '{if (NR <= 3) print $2 }'`
+
+    echo "3 top product"
+    echo $ans2
+    ```
+
+Terakhir setelah memiliki 3 product line. Untuk mencari 3 product dengan penjualan terbanyak berdasarkan product line yang sudah didapatkan. Dengan menggunakan regex untuk mencari baris yang mengandung salah satu dari 3 product line yang didapat.
+
+- `/('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/` regex untuk memeriksa apakah memenuhi salah satu dari 3 productline tersebut.
+
+Kemudian tidak lupa memeriksa apakah tahun merupakan 2012 dan negara merupakan country yang telah didapat.
+
+Keterangan :
+
+- `-F ","` sintaks tersebut untuk mendefinisikan field separator secara manual.
+- `'"$var"'` digunakan untuk memasukkan variable bash kedalam sintaks awk.
+- `${array[@]}` digunakan untuk mengeluarkan semua isi array.
+
 ## Soal 3
 Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak 12 karakter yang terdapat huruf besar, huruf kecil, dan angka. Password acak tersebut disimpan pada file berekstensi .txt dengan ketentuan pemberian nama sebagai berikut:
 

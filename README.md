@@ -1,5 +1,9 @@
 # Soal Shift Modul 1 (Kelompok E6)
 
+###### Nama Anggota :
+1. Ifta Jihan Nabila (05111740000034)
+2. Komang Yogananda MW (05111740000114)
+
 Soal Shift Modul 1 Sistem Operasi 2019:
 * [Soal 1](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-1)
 * [Soal 2](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-2)

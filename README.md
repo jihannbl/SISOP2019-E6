@@ -164,19 +164,32 @@ d.	Password yang dihasilkan tidak boleh sama.
 
     ```bash
     #!/bin/bash
-    n="password"
-    i=1
+	n="password"
+	i=1
 
-    while test -f "$n$i.txt"; do
-    (( ++i ))
-    done
+	function random(){
+	   local inipass=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12`
+	   echo $inipass
+	}
 
-    fname="$n$i.txt"
-    head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 > "$fname"
+	pass=`random`
+
+	while test -f "$n$i.txt"; do
+	  if [ "$pass" == "`cat $n$i.txt`" ]
+	  then
+	   i=1
+	   pass=`random`
+	  else (( ++i ))
+	  fi
+	done
+
+	fname="$n$i.txt"
+	echo $pass > "$fname"
     ```
-    
-    - `while test -f "$n$i.txt"` untuk mengecek apakah terdapat file dengan nama "password$i.txt", jika ada maka increment i
     - `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12` fungsi untuk random password yang memiliki huruf besar, huruf kecil, angka dan memiliki 12 karakter.
+    - `while test -f "$n$i.txt"` untuk mengecek apakah terdapat file dengan nama "password$i.txt", jika ada maka ek apakah isi variabel **pass** (password yang telah dirandom) sama dengan isi file dari password$i.txt
+      - Jika iya maka variabel **i** diset ulang menjadi 1. Lalu variabel **pass** akan memanggil fungsi **random** dan menyimpan password random yang baru
+      - Jika tidak maka increment i
     - Password tersebut akan disimpan pada file password$i.txt
     - Misalkan file password1.txt sampai password6.txt telah dibuat, apabila password4.txt dihapus dan ingin membuat file baru lagi. Maka password tersebut akan disimpan ke file password4.txt bukan password7.txt karena pada `while test -f "$n$i.txt"` mengecek dari `i=1`
 
@@ -195,9 +208,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 
 **_Jawaban:_**
 
-1. Untuk [soal4.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4.sh)
-
-2. Untuk [soal4_2.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4_2.sh)
+Penjelasan untuk [soal4_2.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4_2.sh)
 
 **Command untuk enkripsi : bash soal4.sh -e**
 

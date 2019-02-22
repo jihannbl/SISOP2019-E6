@@ -146,8 +146,8 @@ Command untuk enkripsi : bash soal4_2.sh -e
   
   Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
   
-  
-Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'
+
+  Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'
   
 * Buat script untuk dekripsi 
 
@@ -180,7 +180,7 @@ Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'
   
 * Crontab yang digunakan untuk backup syslog tiap jam
 
-`0 * * * * /home/jihan/soal4.sh -e`
+  `0 * * * * /home/jihan/soal4.sh -e`
 
 
 ## Soal 5

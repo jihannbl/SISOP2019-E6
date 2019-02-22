@@ -212,7 +212,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 
 **_Jawaban:_**
 
-Penjelasan untuk [soal4_2.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4_2.sh)
+Penjelasan untuk [soal4.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4.sh)
 
 **Command untuk enkripsi : bash soal4.sh -e**
 

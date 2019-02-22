@@ -4,12 +4,12 @@
 1. Ifta Jihan Nabila (05111740000034)
 2. Komang Yogananda MW (05111740000114)
 
-Soal Shift Modul 1 Sistem Operasi 2019:
-* [Soal 1](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-1)
-* [Soal 2](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-2)
-* [Soal 3](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-3)
-* [Soal 4](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-4)
-* [Soal 5](https://github.com/jihannbl/SoalShift_modul1_E06-E6#soal-5)
+**Soal Shift Modul 1 Sistem Operasi 2019:**
+* [Soal 1](https://github.com/jihannbl/SoalShift_modul1_E06-E6#Soal-1)
+* [Soal 2](https://github.com/jihannbl/SoalShift_modul1_E06-E6#Soal-2)
+* [Soal 3](https://github.com/jihannbl/SoalShift_modul1_E06-E6#Soal-3)
+* [Soal 4](https://github.com/jihannbl/SoalShift_modul1_E06-E6#Soal-4)
+* [Soal 5](https://github.com/jihannbl/SoalShift_modul1_E06-E6#Soal-5)
 
 ## Soal 1
 Anda diminta tolong oleh teman anda untuk mengembalikan filenya yang telah dienkripsi oleh seseorang menggunakan bash script, file yang dimaksud adalah nature.zip. Karena terlalu mudah kalian memberikan syarat akan membuka seluruh file tersebut jika pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
@@ -57,6 +57,8 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
 
 **_Jawaban:_**
 
+* script 2a
+    ```
     #!/bin/bash
 
     country=`awk -F "," '
@@ -77,11 +79,13 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     ' < "$1"`
 
     echo "Negara dengan penjualan terbanyak tahun 2012:  $country"
+    ```
 
-Pertama-tama variabel country menyimpan nilai nama negara yang mempunyai kuantitas penjualan pada tahun 2012 terbanyak. Country dapat dicari dengan menggunakan script diatas. 
-- Awk digunakan untuk memeriksa setiap barisnya yaitu apabila kolom ke 7 (kolom tahun) merupakan 2012 maka array penghitung dengan index country tersebut ditambah dengan kolom 10 (kolom quantity). 
-- Diakhir awk cek isi dari array tersebut dan cari negara dengan penjualan terbanyak.
+    Pertama-tama variabel country menyimpan nilai nama negara yang mempunyai kuantitas penjualan pada tahun 2012 terbanyak. Country dapat dicari dengan menggunakan script diatas. 
+    - Awk digunakan untuk memeriksa setiap barisnya yaitu apabila kolom ke 7 (kolom tahun) merupakan 2012 maka array penghitung dengan index country tersebut ditambah dengan kolom 10 (kolom quantity). 
+    - Diakhir awk cek isi dari array tersebut dan cari negara dengan penjualan terbanyak.
 
+* script 2b
     ```
     declare -a pL
     for i in 1 2 3; do
@@ -105,11 +109,12 @@ Pertama-tama variabel country menyimpan nilai nama negara yang mempunyai kuantit
     done
     ```
 
-Kemudian selanjutnya mencari 3 product line terbanyak dari country yang sudah di dapat. 
-- Deklarasikan array bernama pL. 
-- Iterasi sebanyak 3 kali dimana setiap iterasi menganduk sintaks awk yang memeriksa apakah suatu baris memiliki negara yang diinginkan dan tahun 2012. 
-- Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut.
+    Kemudian selanjutnya mencari 3 product line terbanyak dari country yang sudah di dapat. 
+    - Deklarasikan array bernama pL. 
+    - Iterasi sebanyak 3 kali dimana setiap iterasi menganduk sintaks awk yang memeriksa apakah suatu baris memiliki negara yang diinginkan dan tahun 2012. 
+    - Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut.
 
+* script 2c
     ```
     ans2=`awk -F "," '
     /('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/{
@@ -128,11 +133,11 @@ Kemudian selanjutnya mencari 3 product line terbanyak dari country yang sudah di
     echo $ans2
     ```
 
-Terakhir setelah memiliki 3 product line. Untuk mencari 3 product dengan penjualan terbanyak berdasarkan product line yang sudah didapatkan. Dengan menggunakan regex untuk mencari baris yang mengandung salah satu dari 3 product line yang didapat.
+    Terakhir setelah memiliki 3 product line. Untuk mencari 3 product dengan penjualan terbanyak berdasarkan product line yang sudah didapatkan. Dengan menggunakan regex untuk mencari baris yang mengandung salah satu dari 3 product line yang didapat.
 
-- `/('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/` regex untuk memeriksa apakah memenuhi salah satu dari 3 productline tersebut.
+    - `/('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/` regex untuk memeriksa apakah memenuhi salah satu dari 3 productline tersebut.
 
-Kemudian tidak lupa memeriksa apakah tahun merupakan 2012 dan negara merupakan country yang telah didapat.
+    Kemudian tidak lupa memeriksa apakah tahun merupakan 2012 dan negara merupakan country yang telah didapat.
 
 Keterangan :
 

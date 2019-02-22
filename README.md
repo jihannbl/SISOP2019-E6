@@ -24,7 +24,18 @@ Hint: Base64, Hexdump
       done
       ```
 
-  -  `unzip "nature.zip"` untuk unzip isi dari nature.zip
+  - `unzip "nature.zip"` untuk unzip isi dari nature.zip
+  - `for f in nature/*` loop untuk setiap file (f) pada directory nature
+  - `basename "$f"` untuk mendapatkan nama file dari variabel f yang disimpan ke variabel **filename**
+  - `if [ ${f: -4} == ".jpg" ]` apabila 4 character terakhir dari nama file tersebut sama dengan ".jpg" maka 
+    - perintah `base64 -d "$f"` dilakukan untuk mendekripsi data dari file (f). **base64** digunakan untuk mengenkripsi/mendekripsi data, lalu argumen **-d** dari perintah base64 digunakan untuk mendekripsi data. 
+    - perintah `xxd -r > "nature/hasil_$filename"` dilakukan untuk mengembalikan hexdump ke bentuk aslinya dan menyimpannya pada directory nature dengan nama file hasil_$filename
+    
+    jika bukan, maka akan memberikan output "bukan jpg"
+    
+* Buat crontab untuk membuka file dengan sayarat pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
+
+
   
 ## Soal 2
 Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta untuk memberikan laporan berdasarkan file WA_Sales_Products_2012-14.csv. Laporan yang diminta berupa:

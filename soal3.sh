@@ -14,6 +14,9 @@ while test -f "$n$i.txt"; do
   then
    i=1
    pass=`random`
+   until [ $pass =~ /[A-Z]/ ] && [ $pass =~ /[a-z]/ ] && [ $pass =~ /[0-9]/ ]; do
+     pass=`random`
+   done
   else (( ++i ))
   fi
 done

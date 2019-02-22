@@ -103,7 +103,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 
 2. Untuk [soal4_2.sh](https://github.com/jihannbl/SISOP2019-E6/blob/master/soal4_2.sh)
 
-Command untuk enkripsi : bash soal4_2.sh -e
+**Command untuk enkripsi : bash soal4_2.sh -e**
 
 * Buat script untuk enkripsi
 
@@ -147,7 +147,7 @@ Command untuk enkripsi : bash soal4_2.sh -e
   Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
   
 
-  Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'
+**Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'**
   
 * Buat script untuk dekripsi 
 

@@ -10,19 +10,19 @@ Hint: Base64, Hexdump
 
 * Buat script bash
 
-      ```
-      #!/bin/bash
+   ```    
+   #!/bin/bash
 
-      log=`unzip "nature.zip"`
-      for f in nature/*; do
-          filename=`basename "$f"`
-          if [ ${f: -4} == ".jpg" ]; then
-              `base64 -d "$f" | xxd -r > "nature/hasil_$filename"`
-          else
-              echo "bukan jpg"
-          fi
-      done
-      ```
+   log=`unzip "nature.zip"`
+   for f in nature/*; do
+       filename=`basename "$f"`
+       if [ ${f: -4} == ".jpg" ]; then
+           `base64 -d "$f" | xxd -r > "nature/hasil_$filename"`
+       else
+           echo "bukan jpg"
+       fi
+   done
+   ```   
 
   - `unzip "nature.zip"` untuk unzip isi dari nature.zip
   - `for f in nature/*` loop untuk setiap file (f) pada directory nature

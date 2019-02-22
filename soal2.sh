@@ -1,3 +1,5 @@
+#!/bin/bash
+
 country=`awk -F "," '
 {
 	if ($7 == "2012"){

@@ -123,11 +123,11 @@ e.	dan buatkan juga bash script untuk dekripsinya.
   chra=`chr $(($jam + 65))`
   chrz=`chr $(($jam + 65 - 1))`
   ```
-  fungsi **chr** disini untuk mengkonversi nilai decimal ke dalam ASCII. variabel **a** untuk menyimpan isi dari syslog. 
+  - fungsi **chr** disini untuk mengkonversi nilai decimal ke dalam ASCII. variabel **a** untuk menyimpan isi dari syslog. 
   
-  `$(($jam + 65))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A, lalu disimpan pada variabel **chra** sebagai batas bawah untuk konversi hingga huruf Z.
+  - `$(($jam + 65))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A, lalu disimpan pada variabel **chra** sebagai batas bawah untuk konversi hingga huruf Z.
   
-  `$(($jam + 65 - 1))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A dikurangi 1 (sebelum A), lalu disimpan pada variabel **chrz** sebagai batas atas untuk konversi dari Z hingga chrz.
+  - `$(($jam + 65 - 1))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A dikurangi 1 (sebelum A), lalu disimpan pada variabel **chrz** sebagai batas atas untuk konversi dari Z hingga chrz.
   
   
   ```
@@ -140,11 +140,11 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 	fi
   }
   ```
-  fungsi **enkripsi**, apabila jam saat ini adalah 0 maka simpan ke dalam file dengan isi yang sama.
+  - fungsi **enkripsi**, apabila jam saat ini adalah 0 maka simpan ke dalam file dengan isi yang sama.
   
-  Jika tidak, maka isi file akan dienkripsi dengan menggunakan command **tr** A-Za-z dengan chra dan chrz yang tadi telah dihitung. `${r,,}` digunakan untuk lowercase. 
+  - Jika tidak, maka isi file akan dienkripsi dengan menggunakan command **tr** A-Za-z dengan chra dan chrz yang tadi telah dihitung. `${r,,}` digunakan untuk lowercase. 
   
-  Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
+  - Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
   
 
 **Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'**

@@ -19,7 +19,7 @@ Hint: Base64, Hexdump
 
 * Buat script bash
 
-   ```    
+   ```bash
    #!/bin/bash
 
    log=`unzip "nature.zip"`
@@ -58,7 +58,7 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
 **_Jawaban:_**
 
 * script 2a
-    ```
+    ```bash
     #!/bin/bash
 
     country=`awk -F "," '
@@ -86,7 +86,7 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     - Diakhir awk cek isi dari array tersebut dan cari negara dengan penjualan terbanyak.
 
 * script 2b
-    ```
+    ```bash
     declare -a pL
     for i in 1 2 3; do
 
@@ -115,7 +115,7 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     - Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut.
 
 * script 2c
-    ```
+    ```bash
     ans2=`awk -F "," '
     /('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/{
         if ($7 == "2012" && $1 == "'"$country"'"){
@@ -160,7 +160,7 @@ d.	Password yang dihasilkan tidak boleh sama.
 
 * Buat script bash
 
-    ```
+    ```bash
     #!/bin/bash
     n="password"
     i=1
@@ -201,13 +201,13 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 
 * Buat script untuk enkripsi
 
-  ```
+  ```bash
   jam=`date +"%H"`
   filename=`date +"%H:%M %d-%m-%Y"`
   ```
   variabel **jam** untuk menyimpan jam saat ini. variabel **filename** untuk menyimpan nama file dengan format "jam:menit tanggal-bulan-tahun" saat ini
   
-  ```
+  ```bash
   function chr(){
   printf \\$(printf '%03o' $1)
   }
@@ -224,7 +224,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
   - `$(($jam + 65 - 1))` digunakan untuk menjumlahkan variabel jam dengan 65 yang merupakan ASCII dari A dikurangi 1 (sebelum A), lalu disimpan pada variabel **chrz** sebagai batas atas untuk konversi dari Z hingga chrz.
   
   
-  ```
+  ```bash
   function enkripsi(){
 	if [ $jam -eq 0 ]
 	then printf '%s' "$a" > "$filename"
@@ -245,7 +245,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
   
 * Buat script untuk dekripsi 
 
-  ```
+  ```bash
   function dekripsi(){
 	jamD=$2
 	b=`cat "$1"`
@@ -263,7 +263,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
   
   Tidak beda jauh penjelasannya dengan fungsi enkripsi, namun pada fungsi dekripsi terdapat variabel **jamD** yang diambil dari nama file. Untuk mendapatkan **jamD** maka terdapat perintah 
   
-  ```
+  ```bash
   filenameD=$2
   jamdekripsi=${filenameD:0:2}
   dekripsi "$2" "$jamdekripsi"
@@ -292,7 +292,7 @@ d.	Jalankan script tadi setiap 6 menit dari menit ke 2 hingga 30, contoh 13:02, 
 
 * Buat script awk
  
-   ```
+   ```bash
    #!/bin/bash
 
    cat /var/log/syslog | awk 'BEGIN {IGNORECASE = 1} /cron/ && !/sudo/ {print}' | awk 'NF < 13'

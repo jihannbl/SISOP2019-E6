@@ -179,6 +179,9 @@ d.	Password yang dihasilkan tidak boleh sama.
 	  then
 	   i=1
 	   pass=`random`
+	   until [ $pass =~ /[A-Z]/ ] && [ $pass =~ /[a-z]/ ] && [ $pass =~ /[0-9]/ ]; do
+     	   pass=`random`
+   	   done
 	  else (( ++i ))
 	  fi
 	done
@@ -190,6 +193,7 @@ d.	Password yang dihasilkan tidak boleh sama.
     - `while test -f "$n$i.txt"` untuk mengecek apakah terdapat file dengan nama "password$i.txt", jika ada maka ek apakah isi variabel **pass** (password yang telah dirandom) sama dengan isi file dari password$i.txt
       - Jika iya maka variabel **i** diset ulang menjadi 1. Lalu variabel **pass** akan memanggil fungsi **random** dan menyimpan password random yang baru
       - Jika tidak maka increment i
+    - `[ $pass =~ /[A-Z]/ ] && [ $pass =~ /[a-z]/ ] && [ $pass =~ /[0-9]/ ]` untuk memastikan password memiliki huruf besar, huruf kecil dan angka
     - Password tersebut akan disimpan pada file password$i.txt
     - Misalkan file password1.txt sampai password6.txt telah dibuat, apabila password4.txt dihapus dan ingin membuat file baru lagi. Maka password tersebut akan disimpan ke file password4.txt bukan password7.txt karena pada `while test -f "$n$i.txt"` mengecek dari `i=1`
 

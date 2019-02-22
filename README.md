@@ -35,7 +35,7 @@ Hint: Base64, Hexdump
     
 * Buat crontab untuk membuka file dengan sayarat pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
 
-
+  `14 14 14 2 5 /home/jihan/soal1.sh` 
   
 ## Soal 2
 Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta untuk memberikan laporan berdasarkan file WA_Sales_Products_2012-14.csv. Laporan yang diminta berupa:

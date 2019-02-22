@@ -1,6 +1,11 @@
 # Soal Shift Modul 1 (Kelompok E6)
 
 Soal Shift Modul 1 Sistem Operasi 2019:
+* [Soal 1](https://github.com/jihannbl/SISOP2019-E6#soal-1)
+* [Soal 2](https://github.com/jihannbl/SISOP2019-E6#soal-2)
+* [Soal 3](https://github.com/jihannbl/SISOP2019-E6#soal-3)
+* [Soal 4](https://github.com/jihannbl/SISOP2019-E6#soal-4)
+* [Soal 5](https://github.com/jihannbl/SISOP2019-E6#soal-5)
 
 ## Soal 1
 Anda diminta tolong oleh teman anda untuk mengembalikan filenya yang telah dienkripsi oleh seseorang menggunakan bash script, file yang dimaksud adalah nature.zip. Karena terlalu mudah kalian memberikan syarat akan membuka seluruh file tersebut jika pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.

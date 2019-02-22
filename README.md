@@ -81,9 +81,9 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     echo "Negara dengan penjualan terbanyak tahun 2012:  $country"
     ```
 
-    Pertama-tama variabel country menyimpan nilai nama negara yang mempunyai kuantitas penjualan pada tahun 2012 terbanyak. Country dapat dicari dengan menggunakan script diatas. 
-    - Awk digunakan untuk memeriksa setiap barisnya yaitu apabila kolom ke 7 (kolom tahun) merupakan 2012 maka array penghitung dengan index country tersebut ditambah dengan kolom 10 (kolom quantity). 
-    - Diakhir awk cek isi dari array tersebut dan cari negara dengan penjualan terbanyak.
+    Pertama-tama variabel **country** menyimpan nilai nama negara yang mempunyai kuantitas penjualan pada tahun 2012 terbanyak. **Country** dapat dicari dengan menggunakan script diatas. 
+    - Awk digunakan untuk memeriksa setiap barisnya yaitu apabila kolom ke 7 (kolom tahun) merupakan 2012 maka array penghitung **countries** dengan index **country** tersebut ditambah dengan kolom 10 (kolom quantity). 
+    - Diakhir awk cek isi dari array **countries** tersebut dan cari negara dengan penjualan terbanyak.
 
 * script 2b
     ```bash
@@ -110,9 +110,10 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     ```
 
     Kemudian selanjutnya mencari 3 product line terbanyak dari country yang sudah di dapat. 
-    - Deklarasikan array bernama pL. 
-    - Iterasi sebanyak 3 kali dimana setiap iterasi menganduk sintaks awk yang memeriksa apakah suatu baris memiliki negara yang diinginkan dan tahun 2012. 
-    - Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut.
+    - Deklarasikan array bernama **pL**. 
+    - Dikarenakan ingin mencari 3 tertinggi maka iterasi sebanyak 3 kali dimana setiap iterasi menjalankan sintaks awk yang memeriksa apakah suatu baris memiliki negara yang diinginkan dan tahun 2012. Apabila baris memenuhi hal tersebut maka hitung penjualan product line tersebut dengan menggunakan array **counter**.
+    - Keluaran awk tersebut di sort secara terbalik dan print sesuai indeks dari iterasi tersebut. Keluaran awk akan tersimpan pada array **pL**.
+    - Terakhir iterasi untuk setiap nilai pada array **pL** untuk mengeluarkan 3 product line yang diinginkan.
 
 * script 2c
     ```bash
@@ -133,17 +134,18 @@ c. Tentukan tiga product yang memberikan penjualan(quantity) terbanyak berdasark
     echo $ans2
     ```
 
-    Terakhir setelah memiliki 3 product line. Untuk mencari 3 product dengan penjualan terbanyak berdasarkan product line yang sudah didapatkan. Dengan menggunakan regex untuk mencari baris yang mengandung salah satu dari 3 product line yang didapat.
+    Terakhir setelah memiliki 3 product line. Untuk mencari 3 product dengan penjualan terbanyak berdasarkan product line yang sudah didapatkan. Dengan menggunakan *regex* untuk mencari baris yang mengandung salah satu dari 3 product line yang didapat.
 
     - `/('"${pL[1]}"')|('"${pL[2]}"')|('"${pL[3]}"')/` regex untuk memeriksa apakah memenuhi salah satu dari 3 productline tersebut.
 
-    Kemudian tidak lupa memeriksa apakah tahun merupakan 2012 dan negara merupakan country yang telah didapat.
+    Kemudian tidak lupa memeriksa apakah tahun merupakan 2012 dan negara merupakan **country** yang telah didapat.
 
 Keterangan :
 
 - `-F ","` sintaks tersebut untuk mendefinisikan field separator secara manual.
 - `'"$var"'` digunakan untuk memasukkan variable bash kedalam sintaks awk.
 - `${array[@]}` digunakan untuk mengeluarkan semua isi array.
+- Script soal2.sh dijalankan dengan menerima argument berupa file csv yang akan direkap.
 
 ## Soal 3
 Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak 12 karakter yang terdapat huruf besar, huruf kecil, dan angka. Password acak tersebut disimpan pada file berekstensi .txt dengan ketentuan pemberian nama sebagai berikut:
@@ -197,7 +199,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
 
 2. Untuk [soal4_2.sh](https://github.com/jihannbl/SoalShift_modul1_E06/blob/master/soal4_2.sh)
 
-**Command untuk enkripsi : bash soal4_2.sh -e**
+**Command untuk enkripsi : bash soal4.sh -e**
 
 * Buat script untuk enkripsi
 
@@ -241,7 +243,7 @@ e.	dan buatkan juga bash script untuk dekripsinya.
   - Lalu enkripsi disimpan ke dalam file dengan format yang ada pada $filename.
   
 
-**Command untuk dekripsi : bash soal4_2.sh -d 'nama file yang ingin didekripsi'**
+**Command untuk dekripsi : bash soal4.sh -d 'nama file yang ingin didekripsi'**
   
 * Buat script untuk dekripsi 
 

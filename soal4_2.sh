@@ -1,38 +1,59 @@
-#!/bin/bash
+#/var/log/syslog
 jam=`date +"%H"`
 filename=`date +"%H:%M %d-%m-%Y"`
 jamdekripsi=0
 
-function chr(){
-  printf \\$(printf '%03o' $1)
-}
-
-a=`cat /var/log/syslog`
-
-chra=`chr $(($jam + 65))`
-chrz=`chr $(($jam + 65 - 1))`
-
 function enkripsi(){
-	if [ $jam -eq 0 ]
-	then printf '%s' "$a" > "$filename"
-	else
-	r="$chra-ZA-$chrz"
-	 printf '%s' "$a"| tr A-Za-z $r${r,,} > "$filename"
-	fi
+	`awk '
+	BEGIN{
+		for (n=0;n<256;n++){
+			ord[sprintf("%c",n)]=n
+			chr[n]=sprintf("%c",n)
+		}
+	}
+	{
+		split($0, chars, "")
+		for (i=1;i<=length($0);i++){
+			x=ord[chars[i]]
+			if (x > 96 && x < 123) {
+				x=x+'"$jam"';
+				if (x > 122) x=97+(x%123)
+			}else if (x > 64 && x < 91) {
+				x=x+'"$jam"';
+				if (x > 90) x=65+(x%91)
+			}
+			printf ("%s", chr[x])
+		}
+		printf("\n")
+	}
+	' < "/var/log/syslog" > "$filename"`
 }
 
 function dekripsi(){
 	jamD=$2
-	b=`cat "$1"`
-
-	chra=`chr $(($jamD + 65))`
-	chrz=`chr $(($jamD + 65 - 1))`
-	if [ $jamD -eq 0 ]
-	then printf '%s' "$b" > "dekripsi_$1"
-	else
-	r="$chra-ZA-$chrz"
-	 printf '%s' "$b" | tr $r${r,,} A-Za-z > "dekripsi_$1"
-	fi
+	`awk '
+	BEGIN{
+		for (n=0;n<256;n++){
+			ord[sprintf("%c",n)]=n
+			chr[n]=sprintf("%c",n)
+		}
+	}
+	{
+		split($0, chars, "")
+		for (i=1;i<=length($0);i++){
+			x=ord[chars[i]]
+			if (x > 96 && x < 123) {
+				x=x-'"$jamD"';
+				if (x < 97) x=122-(96-x)
+			}else if (x > 64 && x < 91) {
+				x=x-'"$jamD"';
+				if (x < 65) x=90-(64-x)
+			}
+			printf ("%s", chr[x])
+		}
+		printf("\n")
+	}
+	' < "$1" > "dekripsi_$1"`
 }
 
 case $1 in
